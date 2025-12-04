@@ -10,7 +10,10 @@ This avoids surprises in generated method names for async servers (RequestListAp
 
 Files:
 - common.proto, component_block.proto — proto definitions (updated RPC names)
-- CMakeLists.txt — runs protoc + grpc_cpp_plugin to generate C++ sources into build/generated
+- CMakeLists.txt — runs proto/generate_grpc.sh script
+- proto/generate_grpc.sh — performs the following actions
+      runs protoc + grpc_cpp_plugin to generate C++ sources into include/generated/ and src/generated/
+      runs protoc + grpc_python_plugin to generate python sources into python/generated/
 - array_store.{h,cpp}, system_info.{h,cpp} — small in-memory/state providers
 - common_service_impl.{h,cpp}, component_block_service_impl.{h,cpp} — synchronous service implementations
 - async_common_service.{h,cpp}, async_component_block_service.{h,cpp} — async service handlers that use AsyncCallBase

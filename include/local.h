@@ -10,8 +10,7 @@
 #include "server/common_helper.h"
 #include "server/component_block_helper.h"
 
-#include "client/common_client.h"
-#include "client/component_block_client.h"
+#include "client/client.h"
 
 #include <iostream>
 #include <memory>

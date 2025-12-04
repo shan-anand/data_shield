@@ -95,14 +95,13 @@ int local::run_client(int argc, char **argv)
   }
 
   std::string cmd = argv[argi++];
-  auto channel = grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials());
-  CommonClient commonc(channel);
-  ComponentBlockClient compc(channel);
+  //auto channel = grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials());
+  Client client(server_address);
 
   if (cmd == "list")
   {
     common::ListApisOutput out;
-    if (!commonc.ListApis("", &out))
+    if (!client.common.ListApis("", &out))
     {
       std::cerr << "RPC error\n";
       return 1;
@@ -115,7 +114,7 @@ int local::run_client(int argc, char **argv)
   else if (cmd == "sysinfo")
   {
     common::SystemInfo out;
-    if (!commonc.GetSystemInfo(&out))
+    if (!client.common.GetSystemInfo(&out))
     {
       std::cerr << "RPC error\n";
       return 1;
@@ -138,7 +137,7 @@ int local::run_client(int argc, char **argv)
     cred->set_user_name(argv[argi++]);
     cred->set_password(argv[argi++]);
     component::block::RegisterArrayOutput out;
-    if (!compc.RegisterPowerMax(in, &out) || !out.success())
+    if (!client.component_block.RegisterPowerMax(in, &out) || !out.success())
     {
       std::cerr << "Register failed\n";
       return 1;
@@ -161,7 +160,7 @@ int local::run_client(int argc, char **argv)
     cred->set_user_name(argv[argi++]);
     cred->set_password(argv[argi++]);
     component::block::RegisterArrayOutput out;
-    if (!compc.RegisterPowerStore(in, &out) || !out.success())
+    if (!client.component_block.RegisterPowerStore(in, &out) || !out.success())
     {
       std::cerr << "Register failed\n";
       return 1;
@@ -173,7 +172,7 @@ int local::run_client(int argc, char **argv)
   {
     component::block::ListArraysInput in;
     component::block::ListArraysOutput out;
-    if (!compc.ListArrays(in, &out))
+    if (!client.component_block.ListArrays(in, &out))
     {
       std::cerr << "RPC error\n";
       return 1;
@@ -189,7 +188,7 @@ int local::run_client(int argc, char **argv)
   {
     std::string msg = (argi < argc) ? argv[argi] : "hello";
     common::SystemInfo out;
-    if (!commonc.GetSystemInfo(&out))
+    if (!client.common.GetSystemInfo(&out))
     {
       std::cerr << "RPC error\n";
       return 1;
@@ -201,7 +200,7 @@ int local::run_client(int argc, char **argv)
   {
     component::block::ListArraysInput in;
     component::block::ListArraysOutput out;
-    if (!compc.ListArrays(in, &out))
+    if (!client.component_block.ListArrays(in, &out))
     {
       std::cerr << "RPC error\n";
       return 1;
