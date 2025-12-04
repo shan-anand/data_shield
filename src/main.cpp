@@ -1,10 +1,9 @@
 #include "local.h"
 
-using grpc::Server;
-using grpc::ServerBuilder;
-using grpc::ServerCompletionQueue;
+using namespace std;
 
-void local::print_usage(const char* prog) {
+void local::print_usage(const char *prog)
+{
   std::cerr << "Usage:\n";
   std::cerr << "  " << prog << " --server-sync [address]\n";
   std::cerr << "  " << prog << " --server-async [address] [poller_threads] [initial_slots_per_rpc]\n";
@@ -21,28 +20,54 @@ void local::print_usage(const char* prog) {
   std::cerr << "  count\n";
 }
 
-int main(int argc, char** argv) {
-  if (argc < 2) { local::print_usage(argv[0]); return 1; }
-
-  std::string mode = argv[1];
-  if (mode == "--client") return local::run_client(argc, argv);
-
-  if (mode != "--server-sync" && mode != "--server-async" && mode != "--server") {
-    local::print_usage(argv[0]); return 1;
+int main(int argc, char **argv)
+{
+  if (argc < 2)
+  {
+    local::print_usage(argv[0]);
+    return 1;
   }
 
-  std::string server_address = "0.0.0.0:50051";
-  if (mode == "--server-sync" || mode == "--server") {
-    if (argc >= 3) server_address = argv[2];
-    local::run_server_sync(server_address);
-  } else {
-    int pollers = 4, slots = 4;
-    if (argc >= 3) server_address = argv[2];
-    if (argc >= 4) pollers = std::atoi(argv[3]);
-    if (argc >= 5) slots = std::atoi(argv[4]);
-    if (pollers <= 0) pollers = 1;
-    if (slots <= 0) slots = 1;
-    local::run_server_async(server_address, pollers, slots);
+  std::string mode = argv[1];
+  if (mode == "--client")
+    return local::run_client(argc, argv);
+
+  if (mode != "--server-sync" && mode != "--server-async" && mode != "--server")
+  {
+    local::print_usage(argv[0]);
+    return 1;
+  }
+
+  Server server;
+  if (argc >= 3)
+    server.address = argv[2];
+  if (mode == "--server-sync" || mode == "--server")
+  {
+    server.run_sync();
+  }
+  else
+  {
+    if (argc >= 4) {
+      int pollers = std::atoi(argv[3]);
+      if ( pollers > 0 )
+        server.poller_threads = pollers;
+      else
+      {
+        cout << "Invalid poller_threads value provided: " << argv[3]
+             << " (using default: " << server.poller_threads << ")" << endl;
+      }
+    }
+    if (argc >= 5) {
+      int slots = std::atoi(argv[4]);
+      if ( slots > 0 )
+        server.initial_slots = slots;
+      else
+      {
+        cout << "Invalid initial_slots value provided: " << argv[4]
+             << " (using default: " << server.initial_slots << ")" << endl;
+      }
+    }
+    server.run_async();
   }
 
   return 0;

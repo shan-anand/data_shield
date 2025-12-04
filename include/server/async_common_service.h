@@ -6,23 +6,27 @@
 #include <grpcpp/grpcpp.h>
 #include <memory>
 
-class AsyncCommonService {
- public:
-  explicit AsyncCommonService(std::shared_ptr<CommonHelper> helper);
-  ~AsyncCommonService();
+namespace _async {
 
-  common::Api::AsyncService* service() { return &service_; }
+class CommonService
+{
+public:
+  explicit CommonService(std::shared_ptr<CommonHelper> helper);
+  ~CommonService();
 
-  void Start(grpc::ServerCompletionQueue* cq, int initial_slots = 2);
+  common::Api::AsyncService *service() { return &service_; }
+
+  void Start(grpc::ServerCompletionQueue *cq, int initial_slots = 2);
   void Shutdown();
 
- private:
-  class CallBase;
+private:
+  class ICall;
   class ListApisCall;
   class GetSystemInfoCall;
 
   common::Api::AsyncService service_;
-  grpc::ServerCompletionQueue* cq_;
+  grpc::ServerCompletionQueue *cq_;
   std::shared_ptr<CommonHelper> helper_;
 };
 
+} // namespace async

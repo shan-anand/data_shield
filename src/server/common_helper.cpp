@@ -3,9 +3,12 @@
 #include <thread>
 #include <chrono>
 
-CommonHelper::CommonHelper() : start_time_(std::chrono::steady_clock::now()) {}
+CommonHelper::CommonHelper() : start_time_(std::chrono::steady_clock::now())
+{
+}
 
-common::SystemInfo CommonHelper::GetSystemInfo() const {
+common::SystemInfo CommonHelper::GetSystemInfo() const
+{
   common::SystemInfo out;
   auto now = std::chrono::system_clock::now();
   auto duration = now.time_since_epoch();
@@ -31,12 +34,16 @@ common::SystemInfo CommonHelper::GetSystemInfo() const {
   return out;
 }
 
-common::ListApisOutput CommonHelper::ListApis(const common::ListApisInput& in) const {
+common::ListApisOutput CommonHelper::ListApis(const common::ListApisInput &in) const
+{
   common::ListApisOutput out;
-  std::vector<std::string> all = { "common.Api", "component.block.Api" };
-  for (const auto& a : all) {
-    if (!in.search().empty()) {
-      if (a.find(in.search()) == std::string::npos) continue;
+  std::vector<std::string> all = {"common.Api", "component.block.Api"};
+  for (const auto &a : all)
+  {
+    if (!in.search().empty())
+    {
+      if (a.find(in.search()) == std::string::npos)
+        continue;
     }
     out.add_apis(a);
   }

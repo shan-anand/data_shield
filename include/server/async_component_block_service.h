@@ -6,24 +6,28 @@
 #include <grpcpp/grpcpp.h>
 #include <memory>
 
-class AsyncComponentBlockService {
- public:
-  explicit AsyncComponentBlockService(std::shared_ptr<ComponentBlockHelper> helper);
-  ~AsyncComponentBlockService();
+namespace _async {
 
-  component::block::Api::AsyncService* service() { return &service_; }
+class ComponentBlockService
+{
+public:
+  explicit ComponentBlockService(std::shared_ptr<ComponentBlockHelper> helper);
+  ~ComponentBlockService();
 
-  void Start(grpc::ServerCompletionQueue* cq, int initial_slots = 4);
+  component::block::Api::AsyncService *service() { return &service_; }
+
+  void Start(grpc::ServerCompletionQueue *cq, int initial_slots = 4);
   void Shutdown();
 
- private:
-  class CallBase;
+private:
+  class ICall;
   class RegisterPowerMaxCall;
   class RegisterPowerStoreCall;
   class ListArraysCall;
 
   component::block::Api::AsyncService service_;
-  grpc::ServerCompletionQueue* cq_;
+  grpc::ServerCompletionQueue *cq_;
   std::shared_ptr<ComponentBlockHelper> helper_;
 };
 
+} // namespace async
