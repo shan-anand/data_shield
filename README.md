@@ -2,39 +2,68 @@
 # data_shield
 Performs data protection of files and blocks to and from the cloud
 
-This workspace has been regenerated so RPC names follow UpperCamelCase:
+This workspace implements gRPC services with UpperCamelCase RPC names:
 - common.Api: ListApis, GetSystemInfo
 - component.block.Api: RegisterPowerMax, RegisterPowerStore, ListArrays
 
-This avoids surprises in generated method names for async servers (RequestListApis instead of RequestlistApis).
+## Project Structure
 
-Files:
-- common.proto, component_block.proto — proto definitions (updated RPC names)
-- CMakeLists.txt — runs proto/generate_grpc.sh script
-- proto/generate_grpc.sh — performs the following actions
-      runs protoc + grpc_cpp_plugin to generate C++ sources into include/generated/ and src/generated/
-      runs protoc + grpc_python_plugin to generate python sources into python/generated/
-- array_store.{h,cpp}, system_info.{h,cpp} — small in-memory/state providers
-- common_service_impl.{h,cpp}, component_block_service_impl.{h,cpp} — synchronous service implementations
-- async_common_service.{h,cpp}, async_component_block_service.{h,cpp} — async service handlers that use AsyncCallBase
-- async_call_base.h — common base for CallData
-- client.{h,cpp} — simple synchronous client wrappers
-- main.cpp — single executable supporting --server-sync, --server-async and --client modes
+### Proto Definitions
+- `proto/common.proto` — Common API service definitions
+- `proto/component_block.proto` — Block component service for array management
+- `proto/generate_grpc.sh` — Code generation script
 
-Build
-- mkdir build && cd build
-- cmake ..
-- make
+### C++ Implementation
+- `include/server/` — Server headers (sync/async services, helpers)
+- `src/server/` — Server implementations
+- `include/client/` — Client headers
+- `src/client/` — Client implementations
+- `src/main.cpp` — Main executable with server/client modes
+- `include/generated/`, `src/generated/` — Generated protobuf/gRPC code
 
-Run examples
-- Start synchronous server:
-  ./data_shield --server-sync 0.0.0.0:50051
+### Python Client
+- `python/client.py` — Python client implementation
+- `python/generated/` — Generated Python protobuf/gRPC modules
 
-- Start async server:
-  ./data_shield --server-async 0.0.0.0:50051 4 4
+### Build System
+- `CMakeLists.txt` — CMake configuration
+- `clean.sh` — Cleanup script for build and generated files
 
-- Client examples:
-  ./data_shield --client localhost:50051 list
-  ./data_shield --client localhost:50051 sysinfo
-  ./data_shield --client localhost:50051 add-array-powermax MyArray sx-1 dns user pass
+## Build
+```bash
+mkdir build && cd build
+cmake ..
+make
+```
+
+## Usage
+
+### Server
+```bash
+# Synchronous server
+./data_shield --server-sync [address]
+
+# Asynchronous server
+./data_shield --server-async [address] [poller_threads] [initial_slots_per_rpc]
+```
+Defaults: address=0.0.0.0:50051, poller_threads=4, initial_slots_per_rpc=4
+
+### C++ Client
+```bash
+./data_shield --client [address] <command> [args...]
+```
+
+### Python Client
+```bash
+./python/client.py --address [address] <command> [args...]
+```
+
+### Client Commands
+- `list` — List available APIs
+- `sysinfo` — Get system information (uptime, memory)
+- `add-array-powermax <name> <symmetrix_id> <dns> <user> <pass>` — Register PowerMax array
+- `add-array-powerstore <name> <appliance_id> <dns> <user> <pass>` — Register PowerStore array
+- `list-arrays` — List registered arrays
+- `count` — Count registered arrays
+- `ping [msg]` — Health check with optional message
 ```
