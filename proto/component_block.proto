@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package component.block;
+
+service Api {
+  rpc RegisterPowerMax(RegisterPowerMaxInput) returns (RegisterArrayOutput) {}
+  rpc RegisterPowerStore(RegisterPowerStoreInput) returns (RegisterArrayOutput) {}
+  rpc ListArrays(ListArraysInput) returns (ListArraysOutput) {}
+}
+
+message RegisterPowerMaxInput {
+  string name = 1;
+  string symmetrix_id = 2;
+  string dns_name = 3;
+  Credential mgmt_credential = 4;
+  optional uint32 max_device_use_limit = 5;
+}
+
+message RegisterPowerStoreInput {
+  string name = 1;
+  string appliance_id = 2;
+  string dns_name = 3;
+  Credential mgmt_credential = 4;
+  optional uint32 max_device_use_limit = 5;
+  optional JobModel job_model = 6;
+}
+
+message RegisterArrayOutput {
+  bool success = 1;
+  optional ArrayInfo array = 2;
+  optional Error error = 3;
+}
+
+message ListArraysInput {
+  optional string name = 1;
+  optional string array_id = 2;
+  optional ArrayType type = 3;
+}
+
+message ListArraysOutput {
+  repeated ArrayInfo arrays = 1;
+}
+
+message Error {
+  string message = 1;
+}
+
+message ArrayInfo {
+  ArrayType type = 1;
+  string name = 2;
+  string dns_name = 3;
+  Credential mgmt_credential = 4;
+  oneof specific {
+    PowerMaxSpecific power_max = 101;
+    PowerStoreSpecific power_store = 102;
+  }
+  uint32 max_device_use_limit = 5;
+  JobModel job_model = 6;
+}
+
+enum ArrayType {
+  ARRAY_TYPE_UNKNOWN = 0;
+  ARRAY_TYPE_POWER_MAX = 1;
+  ARRAY_TYPE_POWER_STORE = 2;
+}
+
+enum JobModel {
+  JOB_MODEL_UNKNOWN = 0;
+  JOB_MODEL_PUSH = 1;
+  JOB_MODEL_PULL = 2;
+  JOB_MODEL_BOTH = 3;
+}
+
+message Credential {
+  string user_name = 1;
+  string password = 2;
+}
+
+message PowerMaxSpecific {
+  string symmetrix_id = 1;
+}
+
+message PowerStoreSpecific {
+  string appliance_id = 1;
+}
