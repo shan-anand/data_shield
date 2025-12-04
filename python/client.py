@@ -24,10 +24,10 @@ import time
 # Generated protobuf/grpc python modules - make sure these are on PYTHONPATH or installed.
 import google.protobuf.empty_pb2 as empty_pb2
 
-from data_shield import common_pb2
-from data_shield import common_pb2_grpc
-from data_shield import component_block_pb2
-from data_shield import component_block_pb2_grpc
+from generated import common_pb2
+from generated import common_pb2_grpc
+from generated import component_block_pb2
+from generated import component_block_pb2_grpc
 
 
 DEFAULT_ADDRESS = "localhost:50051"

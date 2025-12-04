@@ -16,13 +16,13 @@ sed -i 's/#include "\([^"]*\)\.pb\.h"/#include "generated\/\1.pb.h"/g' ../src/ge
 
 ####### Python code generation
 # --pyi_out is needed to create intellisense info. Without this intellisense won't work in the editor
-mkdir -p ../python/data_shield 2>/dev/null
+mkdir -p ../python/generated 2>/dev/null
 protoc --proto_path=./ \
-       --python_out=../python/data_shield \
-       --pyi_out=../python/data_shield \
-       --grpc_out=../python/data_shield \
+       --python_out=../python/generated \
+       --pyi_out=../python/generated \
+       --grpc_out=../python/generated \
        --plugin=protoc-gen-grpc=`which grpc_python_plugin` \
        common.proto component_block.proto
 
 # fix imports in generated Python gRPC files
-sed -i 's/^import \([a-zA-Z_][a-zA-Z0-9_]*\)_pb2 as/from . import \1_pb2 as/g' ../python/data_shield/*_pb2_grpc.py
+sed -i 's/^import \([a-zA-Z_][a-zA-Z0-9_]*\)_pb2 as/from . import \1_pb2 as/g' ../python/generated/*_pb2_grpc.py
