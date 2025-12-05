@@ -48,8 +48,12 @@ int local::run_client(int argc, char **argv)
   }
   else if (cmd == "sysinfo")
   {
+    common::SystemInfoInput in;
+    if ( argi < argc )
+      in.set_sleep_time(std::atoi(argv[argi++]));
+
     common::SystemInfo out;
-    if (!client.common.GetSystemInfo(&out))
+    if (!client.common.GetSystemInfo(in, &out))
     {
       std::cerr << "RPC error\n";
       return 1;
@@ -122,8 +126,9 @@ int local::run_client(int argc, char **argv)
   else if (cmd == "ping")
   {
     std::string msg = (argi < argc) ? argv[argi] : "hello";
+    common::SystemInfoInput in;
     common::SystemInfo out;
-    if (!client.common.GetSystemInfo(&out))
+    if (!client.common.GetSystemInfo(in, &out))
     {
       std::cerr << "RPC error\n";
       return 1;
@@ -173,4 +178,6 @@ void local::print(const common::SystemInfo &systemInfo)
     local::print(systemInfo.ram(), "RAM");
   if (systemInfo.has_swap())
     local::print(systemInfo.swap(), "Swap");
+  if ( systemInfo.has_slept_for() )
+    cout << "Sleep time...: " << systemInfo.slept_for() << " seconds" << endl;
 }

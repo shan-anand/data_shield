@@ -1,13 +1,12 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 package common;
 
 service Api {
   rpc ListApis (ListApisInput) returns (ListApisOutput) {}
-  rpc GetSystemInfo(google.protobuf.Empty) returns (SystemInfo) {}
+  rpc GetSystemInfo(SystemInfoInput) returns (SystemInfo) {}
 }
 
 message ListApisInput {
@@ -24,9 +23,21 @@ message Space {
   uint64 free = 3;
 }
 
+message SystemInfoInput {
+  /*
+   * Sleep time specified in seconds.
+   * This is the amount of time the server will sleep before getting the data.
+   * 1) If omitted, it won't sleep.
+   * 2) 0 < seconds <= 30, any value > 30 is treated as 30
+   * 3) seconds < 0, sleeps for a random range of 1 to 5 seconds
+   */
+  optional int32 sleep_time = 1; // Sleep time in seconds
+}
+
 message SystemInfo {
   google.protobuf.Timestamp timestamp = 1;
   uint64 uptime = 2;
   Space ram = 3;
   Space swap = 4;
+  optional int32 slept_for = 5; // Amount of time the server slept before processing the request
 }

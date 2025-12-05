@@ -80,12 +80,12 @@ protected:
 
   void OnProcess() override
   {
-    common::SystemInfo info = helper_->GetSystemInfo();
+    common::SystemInfo info = helper_->GetSystemInfo(request_);
     responder_.Finish(info, grpc::Status::OK, this);
   }
 
 private:
-  google::protobuf::Empty request_;
+  common::SystemInfoInput request_;
   grpc::ServerAsyncResponseWriter<common::SystemInfo> responder_;
 };
 

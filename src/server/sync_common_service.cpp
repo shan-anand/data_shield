@@ -14,9 +14,9 @@ Status CommonService::ListApis(ServerContext * /*context*/, const common::ListAp
   return Status::OK;
 }
 
-Status CommonService::GetSystemInfo(ServerContext * /*context*/, const google::protobuf::Empty * /*request*/,
+Status CommonService::GetSystemInfo(ServerContext * /*context*/, const common::SystemInfoInput *request,
                                     common::SystemInfo *response)
 {
-  *response = helper_->GetSystemInfo();
+  *response = helper_->GetSystemInfo(*request);
   return Status::OK;
 }

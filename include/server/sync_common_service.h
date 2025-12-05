@@ -15,7 +15,7 @@ public:
   grpc::Status ListApis(grpc::ServerContext *context, const common::ListApisInput *request,
                         common::ListApisOutput *response) override;
 
-  grpc::Status GetSystemInfo(grpc::ServerContext *context, const google::protobuf::Empty *request,
+  grpc::Status GetSystemInfo(grpc::ServerContext *context, const common::SystemInfoInput *request,
                               common::SystemInfo *response) override;
 
 private:

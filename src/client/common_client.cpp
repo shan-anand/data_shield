@@ -16,8 +16,7 @@ bool CommonClient::ListApis(const std::string& search, common::ListApisOutput* o
   return s.ok();
 }
 
-bool CommonClient::GetSystemInfo(common::SystemInfo* out) {
-  google::protobuf::Empty in;
+bool CommonClient::GetSystemInfo(const common::SystemInfoInput& in, common::SystemInfo* out) {
   ClientContext ctx;
   Status s = stub_->GetSystemInfo(&ctx, in, out);
   return s.ok();

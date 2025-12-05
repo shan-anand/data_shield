@@ -14,7 +14,7 @@ class CommonClient {
 
   // Synchronous calls
   bool ListApis(const std::string& search, common::ListApisOutput* out);
-  bool GetSystemInfo(common::SystemInfo* out);
+  bool GetSystemInfo(const common::SystemInfoInput& in, common::SystemInfo* out);
 
  private:
   std::unique_ptr<common::Api::Stub> stub_;
