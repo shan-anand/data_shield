@@ -34,7 +34,7 @@ file(GLOB SRC_GENERATED src/generated/*.cc)
 file(GLOB SRC_UTIL src/util/*.cpp)
 file(GLOB SRC_SERVICE src/service/*.cpp)
 file(GLOB SRC_STUB src/stub/*.cpp)
-file(GLOB SRC_ROOT src/*.cpp)
+file(GLOB SRC_CLI src/cli/*.cpp)
 
 # common files
 set(SRC_COMMON
@@ -43,17 +43,17 @@ set(SRC_COMMON
 )
 
 # CLI files for both server and client
-set(SRC_CLI
+set(SRC_DATA_SHIELD
   ${SRC_SERVICE}
   ${SRC_STUB}
-  ${SRC_ROOT}
+  ${SRC_CLI}
 )
 
 # Create object library - compiled once, linked to both executables
 add_library(obj_common OBJECT ${SRC_COMMON})
 
 add_executable(data_shield
-  ${SRC_CLI}
+  ${SRC_DATA_SHIELD}
   $<TARGET_OBJECTS:obj_common>
 )
 

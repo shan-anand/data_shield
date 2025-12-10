@@ -1,4 +1,4 @@
-#include "service/server.h"
+#include "cli/server.h"
 
 #include <thread>
 #include <unistd.h>
@@ -6,9 +6,9 @@
 #include <iostream>
 
 using namespace std;
-using namespace data_shield;
+using namespace data_shield::cli;
 
-Server::Server(const util::HostInfo& _hostInfo) :
+Server::Server(const HostInfo& _hostInfo) :
   hostInfo(_hostInfo),
   runMode(RunMode::Sync),
   background(false),
@@ -18,7 +18,7 @@ Server::Server(const util::HostInfo& _hostInfo) :
 {
 }
 
-Server::Server() : Server(util::HostInfo())
+Server::Server() : Server(HostInfo())
 {
 }
 

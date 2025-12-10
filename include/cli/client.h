@@ -4,15 +4,15 @@
 
 #include "stub/common_stub.h"
 #include "stub/component_block_stub.h"
-#include "util/host_info.h"
+#include "host_info.h"
 
-namespace data_shield {
+namespace data_shield::cli {
 
 class Client
 {
 public:
   Client(const std::string& server_address);
-  Client(const util::HostInfo& hostInfo);
+  Client(const HostInfo& hostInfo);
   Client(std::shared_ptr<grpc::Channel> channel);
 
 public:
@@ -24,4 +24,4 @@ private:
   std::shared_ptr<grpc::Channel> channel_;
 };
 
-} // namespace data_shield
+} // namespace data_shield::cli

@@ -10,9 +10,9 @@
 
 #include "service/sync_common_service.h"
 #include "service/sync_component_block_service.h"
-#include "util/host_info.h"
+#include "host_info.h"
 
-namespace data_shield {
+namespace data_shield::cli {
 
 class Server
 {
@@ -20,11 +20,11 @@ public:
   enum class RunMode { Sync, Async };
 public:
   Server();
-  Server(const util::HostInfo& _hostInfo);
+  Server(const HostInfo& _hostInfo);
   virtual ~Server();
   void run();
 
-  util::HostInfo  hostInfo;       // Host and port info
+  HostInfo        hostInfo;       // Host and port info
   RunMode         runMode;        // run mode (sync or async)
   bool            background;     // run in background
   std::shared_ptr<grpc::ServerCredentials> creds; // Server credentials
@@ -37,4 +37,4 @@ protected:
   virtual void run_sync();
 };
 
-} // namespace data_shield
+} // namespace data_shield::cli

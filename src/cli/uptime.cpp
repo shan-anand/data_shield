@@ -1,8 +1,8 @@
-#include "util/uptime.h"
+#include "cli/uptime.h"
 #include <iomanip>
 #include <sstream>
 
-using namespace data_shield::util;
+using namespace data_shield::cli;
 
 Uptime::Uptime(uint64_t _epoch/* = 0*/)
 {

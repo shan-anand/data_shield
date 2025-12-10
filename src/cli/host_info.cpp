@@ -1,6 +1,6 @@
-#include "util/host_info.h"
+#include "cli/host_info.h"
 
-using namespace data_shield::util;
+using namespace data_shield::cli;
 
 HostInfo::HostInfo() : m_address(HOSINFO_DEFAULT_ADDRESS), m_port(HOSINFO_DEFAULT_PORT)
 {

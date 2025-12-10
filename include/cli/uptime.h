@@ -3,7 +3,7 @@
 #include <string>
 #include <cstdint>
 
-namespace data_shield::util {
+namespace data_shield::cli {
 
 struct Uptime
 {
@@ -18,4 +18,4 @@ struct Uptime
   std::string to_str() const;
 };
 
-} // namespace data_shield::util
+} // namespace data_shield::cli

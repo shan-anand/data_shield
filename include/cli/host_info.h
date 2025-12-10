@@ -6,7 +6,7 @@
 #define HOSINFO_DEFAULT_ADDRESS "0.0.0.0"
 #define HOSINFO_DEFAULT_PORT    50051
 
-namespace data_shield::util {
+namespace data_shield::cli {
 
 class HostInfo
 {
@@ -32,4 +32,4 @@ public:
 
 };
 
-} // namespace data_shield::util
+} // namespace data_shield::cli

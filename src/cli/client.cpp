@@ -1,13 +1,13 @@
 
-#include "stub/client.h"
+#include "cli/client.h"
 
-using namespace data_shield;
+using namespace data_shield::cli;
 
 Client::Client(const std::string& server_address) :
   Client(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()))
 {}
 
-Client::Client(const util::HostInfo& hostInfo) :
+Client::Client(const HostInfo& hostInfo) :
   Client(hostInfo.to_str())
 {}
 
