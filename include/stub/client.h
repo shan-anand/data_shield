@@ -2,8 +2,8 @@
 
 #include <grpcpp/grpcpp.h>
 
-#include "client/common_client.h"
-#include "client/component_block_client.h"
+#include "stub/common_stub.h"
+#include "stub/component_block_stub.h"
 #include "util/host_info.h"
 
 namespace data_shield {
@@ -16,8 +16,8 @@ public:
   Client(std::shared_ptr<grpc::Channel> channel);
 
 public:
-  CommonClient common;
-  ComponentBlockClient component_block;
+  CommonApiStub common;
+  ComponentBlockApiStub component_block;
   std::shared_ptr<grpc::Channel> channel() const { return channel_; }
 
 private:

@@ -10,10 +10,10 @@ using grpc::Channel;
 
 namespace data_shield {
 
-class CommonClient
+class CommonApiStub
 {
 public:
-  explicit CommonClient(std::shared_ptr<Channel> channel);
+  explicit CommonApiStub(std::shared_ptr<Channel> channel);
 
   // Synchronous calls
   bool ListApis(const std::string& search, common::ListApisOutput* out);

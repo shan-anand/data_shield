@@ -33,7 +33,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 file(GLOB SRC_GENERATED src/generated/*.cc)
 file(GLOB SRC_UTIL src/util/*.cpp)
 file(GLOB SRC_SERVICE src/service/*.cpp)
-file(GLOB SRC_CLIENT src/client/*.cpp)
+file(GLOB SRC_STUB src/stub/*.cpp)
 file(GLOB SRC_ROOT src/*.cpp)
 
 # common files
@@ -45,7 +45,7 @@ set(SRC_COMMON
 # CLI files for both server and client
 set(SRC_CLI
   ${SRC_SERVICE}
-  ${SRC_CLIENT}
+  ${SRC_STUB}
   ${SRC_ROOT}
 )
 

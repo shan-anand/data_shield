@@ -1,5 +1,5 @@
 
-#include "client/client.h"
+#include "stub/client.h"
 
 using namespace data_shield;
 

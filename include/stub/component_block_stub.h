@@ -9,10 +9,10 @@ using grpc::Channel;
 
 namespace data_shield {
 
-class ComponentBlockClient
+class ComponentBlockApiStub
 {
 public:
-  explicit ComponentBlockClient(std::shared_ptr<Channel> channel);
+  explicit ComponentBlockApiStub(std::shared_ptr<Channel> channel);
 
   // Synchronous calls
   bool RegisterPowerMax(const component::block::RegisterPowerMaxInput& in,
