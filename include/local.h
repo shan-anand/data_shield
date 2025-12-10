@@ -1,7 +1,7 @@
 #pragma once
 
 #include <grpcpp/grpcpp.h>
-#include "server/server.h"
+#include "service/server.h"
 #include "client/client.h"
 #include "util/host_info.h"
 

@@ -1,4 +1,4 @@
-#include "server/sync_common_service.h"
+#include "service/sync_common_service.h"
 
 using grpc::ServerContext;
 using grpc::Status;

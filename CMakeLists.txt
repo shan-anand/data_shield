@@ -32,7 +32,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 file(GLOB SRC_GENERATED src/generated/*.cc)
 file(GLOB SRC_UTIL src/util/*.cpp)
-file(GLOB SRC_SERVER src/server/*.cpp)
+file(GLOB SRC_SERVICE src/service/*.cpp)
 file(GLOB SRC_CLIENT src/client/*.cpp)
 file(GLOB SRC_ROOT src/*.cpp)
 
@@ -44,7 +44,7 @@ set(SRC_COMMON
 
 # CLI files for both server and client
 set(SRC_CLI
-  ${SRC_SERVER}
+  ${SRC_SERVICE}
   ${SRC_CLIENT}
   ${SRC_ROOT}
 )
@@ -64,8 +64,8 @@ enable_testing()
 
 # Run the server
 add_test(NAME StartServer
-  COMMAND daemonize ${EXECUTABLE_OUTPUT_PATH}/data_shield
-  --server
+  COMMAND ${EXECUTABLE_OUTPUT_PATH}/data_shield
+  --server --background
 )
 set_tests_properties(StartServer PROPERTIES
     FIXTURES_SETUP SERVER_FIXTURE

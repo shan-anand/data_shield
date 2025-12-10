@@ -1,5 +1,5 @@
-#include "server/async_common_service.h"
-#include "server/async_call_base.h"
+#include "service/async_common_service.h"
+#include "service/async_call_base.h"
 
 #include <google/protobuf/empty.pb.h>
 

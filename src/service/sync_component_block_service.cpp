@@ -1,4 +1,4 @@
-#include "server/sync_component_block_service.h"
+#include "service/sync_component_block_service.h"
 
 using component::block::RegisterArrayOutput;
 using grpc::ServerContext;

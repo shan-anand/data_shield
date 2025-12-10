@@ -1,4 +1,4 @@
-#include "server/component_block_helper.h"
+#include "service/component_block_helper.h"
 
 #include <algorithm>
 #include <string>

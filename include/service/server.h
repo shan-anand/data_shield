@@ -4,12 +4,12 @@
 
 #include <grpcpp/grpcpp.h>
 
-#include "server/async_call_base.h"
-#include "server/async_common_service.h"
-#include "server/async_component_block_service.h"
+#include "service/async_call_base.h"
+#include "service/async_common_service.h"
+#include "service/async_component_block_service.h"
 
-#include "server/sync_common_service.h"
-#include "server/sync_component_block_service.h"
+#include "service/sync_common_service.h"
+#include "service/sync_component_block_service.h"
 #include "util/host_info.h"
 
 namespace data_shield {

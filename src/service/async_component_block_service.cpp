@@ -1,5 +1,5 @@
-#include "server/async_component_block_service.h"
-#include "server/async_call_base.h"
+#include "service/async_component_block_service.h"
+#include "service/async_call_base.h"
 
 using component::block::Api;
 using grpc::ServerCompletionQueue;
