@@ -4,11 +4,13 @@
 
 #include "client/common_client.h"
 #include "client/component_block_client.h"
+#include "util/host_info.h"
 
 class Client
 {
 public:
   Client(const std::string& server_address);
+  Client(const util::HostInfo& hostInfo);
   Client(std::shared_ptr<grpc::Channel> channel);
 
 public:
