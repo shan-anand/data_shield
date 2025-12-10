@@ -30,26 +30,37 @@ execute_process(
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-file(GLOB SRC_ROOT src/*.cpp)
+file(GLOB SRC_GENERATED src/generated/*.cc)
+file(GLOB SRC_UTIL src/util/*.cpp)
 file(GLOB SRC_SERVER src/server/*.cpp)
 file(GLOB SRC_CLIENT src/client/*.cpp)
-file(GLOB SRC_GENERATED src/generated/*.cc)
+file(GLOB SRC_ROOT src/*.cpp)
 
+# common files
 set(SRC_COMMON
-  ${SRC_ROOT}
-  ${SRC_SERVER}
-  ${SRC_CLIENT}
   ${SRC_GENERATED}
+  ${SRC_UTIL}
 )
 
-# Enable testing support
-enable_testing()
+# CLI files for both server and client
+set(SRC_CLI
+  ${SRC_SERVER}
+  ${SRC_CLIENT}
+  ${SRC_ROOT}
+)
+
+# Create object library - compiled once, linked to both executables
+add_library(obj_common OBJECT ${SRC_COMMON})
 
 add_executable(data_shield
-  ${SRC_COMMON}
+  ${SRC_CLI}
+  $<TARGET_OBJECTS:obj_common>
 )
 
 target_link_libraries(data_shield PRIVATE gRPC::grpc++ protobuf::libprotobuf Threads::Threads)
+
+# Enable testing support
+enable_testing()
 
 # Run the server
 add_test(NAME StartServer

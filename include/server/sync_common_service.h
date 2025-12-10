@@ -4,7 +4,7 @@
 #include "common_helper.h"
 #include <memory>
 
-namespace _sync {
+namespace data_shield::_sync {
 
 class CommonService : public common::Api::Service
 {
@@ -22,4 +22,4 @@ private:
   std::shared_ptr<CommonHelper> helper_;
 };
 
-} // namespace _sync
+} // namespace data_shield::_sync

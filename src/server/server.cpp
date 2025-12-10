@@ -6,6 +6,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace data_shield;
 
 Server::Server(const util::HostInfo& _hostInfo) :
   hostInfo(_hostInfo),

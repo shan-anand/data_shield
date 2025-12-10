@@ -6,7 +6,7 @@
 #include <grpcpp/grpcpp.h>
 #include <memory>
 
-namespace _async {
+namespace data_shield::_async {
 
 class CommonService
 {
@@ -29,4 +29,4 @@ private:
   std::shared_ptr<CommonHelper> helper_;
 };
 
-} // namespace async
+} // namespace data_shield::_async

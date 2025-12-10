@@ -5,7 +5,10 @@
 #include <shared_mutex>
 #include <vector>
 
-class ComponentBlockHelper {
+namespace data_shield {
+
+class ComponentBlockHelper
+{
  public:
   ComponentBlockHelper();
   ~ComponentBlockHelper() = default;
@@ -22,3 +25,5 @@ class ComponentBlockHelper {
   std::vector<component::block::ArrayInfo> arrays_;
   uint64_t next_id_; // used to generate unique names if needed
 };
+
+} // namespace data_shield

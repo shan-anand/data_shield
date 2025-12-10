@@ -5,6 +5,8 @@
 using grpc::ClientContext;
 using grpc::Status;
 
+using namespace data_shield;
+
 CommonClient::CommonClient(std::shared_ptr<grpc::Channel> channel)
     : stub_(common::Api::NewStub(channel)) {}
 

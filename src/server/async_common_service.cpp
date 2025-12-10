@@ -5,7 +5,7 @@
 
 using common::Api;
 using grpc::ServerCompletionQueue;
-using namespace _async;
+using namespace data_shield::_async;
 
 // ICall for common service
 class CommonService::ICall : public CallBase

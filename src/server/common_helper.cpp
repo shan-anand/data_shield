@@ -3,6 +3,8 @@
 #include <thread>
 #include <chrono>
 
+using namespace data_shield;
+
 CommonHelper::CommonHelper() : start_time_(std::chrono::steady_clock::now())
 {
 }

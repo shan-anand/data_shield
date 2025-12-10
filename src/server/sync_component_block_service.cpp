@@ -3,7 +3,7 @@
 using component::block::RegisterArrayOutput;
 using grpc::ServerContext;
 using grpc::Status;
-using namespace _sync;
+using namespace data_shield::_sync;
 
 ComponentBlockService::ComponentBlockService(std::shared_ptr<ComponentBlockHelper> helper)
     : helper_(helper) {}

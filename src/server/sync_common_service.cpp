@@ -2,7 +2,7 @@
 
 using grpc::ServerContext;
 using grpc::Status;
-using namespace _sync;
+using namespace data_shield::_sync;
 
 CommonService::CommonService(std::shared_ptr<CommonHelper> helper)
     : helper_(helper) {}

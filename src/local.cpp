@@ -1,5 +1,5 @@
 #include "local.h"
-#include "Uptime.h"
+#include "util/uptime.h"
 #include <iomanip>
 
 using namespace std;
@@ -301,8 +301,8 @@ void local::print(const google::protobuf::Timestamp &_timestamp)
 void local::print(const common::SystemInfo &systemInfo)
 {
   local::print(systemInfo.timestamp());
-  Uptime uptime(systemInfo.uptime());
-  cout << "Uptime......: " << uptime.to_epoch() << " (" << uptime.to_string() << ")" << endl;
+  util::Uptime uptime(systemInfo.uptime());
+  cout << "Uptime......: " << uptime.to_epoch() << " (" << uptime.to_str() << ")" << endl;
   if (systemInfo.has_ram())
     local::print(systemInfo.ram(), "RAM");
   if (systemInfo.has_swap())

@@ -2,7 +2,7 @@
 
 #include <grpcpp/grpcpp.h>
 
-namespace _async {
+namespace data_shield::_async {
 // Common abstract base for all CallData types used by async services.
 // Allows poller threads to cast CQ tags to a single pointer type and invoke Proceed()/Cancel().
 class CallBase
@@ -50,4 +50,4 @@ protected:
   CallStatus status_;
 };
 
-} // namespace async
+} // namespace data_shield::_async

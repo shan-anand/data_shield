@@ -7,8 +7,11 @@
 
 using grpc::Channel;
 
-class ComponentBlockClient {
- public:
+namespace data_shield {
+
+class ComponentBlockClient
+{
+public:
   explicit ComponentBlockClient(std::shared_ptr<Channel> channel);
 
   // Synchronous calls
@@ -19,7 +22,8 @@ class ComponentBlockClient {
   bool ListArrays(const component::block::ListArraysInput& in,
                   component::block::ListArraysOutput* out);
 
- private:
+private:
   std::unique_ptr<component::block::Api::Stub> stub_;
 };
 
+} // namespace data_shield

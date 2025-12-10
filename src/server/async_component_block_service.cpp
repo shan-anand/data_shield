@@ -3,7 +3,7 @@
 
 using component::block::Api;
 using grpc::ServerCompletionQueue;
-using namespace _async;
+using namespace data_shield::_async;
 
 void ComponentBlockService::Shutdown()
 {

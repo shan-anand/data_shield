@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <string>
 
+using namespace data_shield;
+
 using component::block::ArrayInfo;
 using component::block::ArrayType;
 using component::block::ListArraysInput;

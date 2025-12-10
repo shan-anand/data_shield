@@ -3,7 +3,10 @@
 #include "generated/common.pb.h"
 #include <chrono>
 
-class CommonHelper {
+namespace data_shield {
+
+class CommonHelper
+{
  public:
   CommonHelper();
   ~CommonHelper() = default;
@@ -16,3 +19,5 @@ class CommonHelper {
  private:
   std::chrono::steady_clock::time_point start_time_;
 };
+
+} // namespace data_shield

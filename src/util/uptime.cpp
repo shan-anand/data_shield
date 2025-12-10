@@ -1,19 +1,8 @@
+#include "util/uptime.h"
 #include <iomanip>
 #include <sstream>
-#include <cstdint>
 
-struct Uptime
-{
-    uint64_t seconds : 6;
-    uint64_t minutes : 6;
-    uint64_t hours   : 5;
-    uint64_t days    : 47;
-
-    Uptime(uint64_t _epoch = 0);
-    Uptime& set(uint64_t _epoch);
-    uint64_t to_epoch() const;
-    std::string to_string() const;
-};
+using namespace data_shield::util;
 
 Uptime::Uptime(uint64_t _epoch/* = 0*/)
 {
@@ -36,7 +25,7 @@ uint64_t Uptime::to_epoch() const
   return ((this->days * 24 + this->hours) * 60 + this->minutes) * 60 + this->seconds; 
 }
 
-std::string Uptime::to_string() const
+std::string Uptime::to_str() const
 {
   std::stringstream out;
   if ( this->days > 0 )

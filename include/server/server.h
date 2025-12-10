@@ -12,6 +12,8 @@
 #include "server/sync_component_block_service.h"
 #include "util/host_info.h"
 
+namespace data_shield {
+
 class Server
 {
 public:
@@ -34,3 +36,5 @@ protected:
   virtual void run_async();
   virtual void run_sync();
 };
+
+} // namespace data_shield

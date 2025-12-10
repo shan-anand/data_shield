@@ -3,6 +3,8 @@
 using grpc::ClientContext;
 using grpc::Status;
 
+using namespace data_shield;
+
 ComponentBlockClient::ComponentBlockClient(std::shared_ptr<grpc::Channel> channel)
     : stub_(component::block::Api::NewStub(channel)) {}
 

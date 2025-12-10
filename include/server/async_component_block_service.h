@@ -6,7 +6,7 @@
 #include <grpcpp/grpcpp.h>
 #include <memory>
 
-namespace _async {
+namespace data_shield::_async {
 
 class ComponentBlockService
 {
@@ -30,4 +30,4 @@ private:
   std::shared_ptr<ComponentBlockHelper> helper_;
 };
 
-} // namespace async
+} // namespace data_shield::_async

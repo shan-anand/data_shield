@@ -4,7 +4,7 @@
 #include "component_block_helper.h"
 #include <memory>
 
-namespace _sync {
+namespace data_shield::_sync {
 
 class ComponentBlockService final : public component::block::Api::Service
 {
@@ -28,4 +28,4 @@ private:
   std::shared_ptr<ComponentBlockHelper> helper_;
 };
 
-} // namespace _sync
+} // namespace data_shield::_sync

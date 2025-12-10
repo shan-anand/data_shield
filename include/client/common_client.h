@@ -8,15 +8,19 @@
 
 using grpc::Channel;
 
-class CommonClient {
- public:
+namespace data_shield {
+
+class CommonClient
+{
+public:
   explicit CommonClient(std::shared_ptr<Channel> channel);
 
   // Synchronous calls
   bool ListApis(const std::string& search, common::ListApisOutput* out);
   bool GetSystemInfo(const common::SystemInfoInput& in, common::SystemInfo* out);
 
- private:
+private:
   std::unique_ptr<common::Api::Stub> stub_;
 };
 
+} // namespace data_shield

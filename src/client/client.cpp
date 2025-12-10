@@ -1,6 +1,8 @@
 
 #include "client/client.h"
 
+using namespace data_shield;
+
 Client::Client(const std::string& server_address) :
   Client(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()))
 {}

@@ -6,6 +6,8 @@
 #include "client/component_block_client.h"
 #include "util/host_info.h"
 
+namespace data_shield {
+
 class Client
 {
 public:
@@ -21,3 +23,5 @@ public:
 private:
   std::shared_ptr<grpc::Channel> channel_;
 };
+
+} // namespace data_shield

@@ -14,6 +14,8 @@
 #include <algorithm>
 #include <optional>
 
+using namespace data_shield;
+
 enum class Action : uint8_t {
   Client = 1,
   ServerSync = 2,
