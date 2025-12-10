@@ -9,12 +9,6 @@
 
 namespace data_shield::cli {
 
-enum class Action : uint8_t {
-  Client = 1,
-  ServerSync = 2,
-  ServerAsync = 3
-};
-
 struct Arg
 {
   std::string key;

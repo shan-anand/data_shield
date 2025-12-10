@@ -26,6 +26,19 @@ Server::~Server()
 {
 }
 
+/*static*/
+Server::RunMode Server::getRunMode(const std::string& _modeStr)
+{
+  const char* p = (_modeStr.substr(0, 2) != "--")? _modeStr.c_str() : _modeStr.c_str() + 2;
+  std::string_view modeViewStr(p);
+  if ( modeViewStr == "async" )
+    return RunMode::Async;
+  else if ( modeViewStr == "sync" )
+    return RunMode::Sync;
+  else
+    throw std::invalid_argument("Invalid run mode string: " + _modeStr);
+}
+
 void Server::run()
 {
   auto run_here = [&]() {

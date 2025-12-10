@@ -31,33 +31,55 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 file(GLOB SRC_GENERATED src/generated/*.cc)
-file(GLOB SRC_UTIL src/util/*.cpp)
 file(GLOB SRC_SERVICE src/service/*.cpp)
 file(GLOB SRC_STUB src/stub/*.cpp)
-file(GLOB SRC_CLI src/cli/*.cpp)
 
 # common files
 set(SRC_COMMON
   ${SRC_GENERATED}
-  ${SRC_UTIL}
 )
 
-# CLI files for both server and client
-set(SRC_DATA_SHIELD
+# cli common files
+set(SRC_CLI_COMMON
+  src/cli/args.cpp
+  src/cli/host_info.cpp
+  src/cli/uptime.cpp
+)
+
+# CLI files for server
+set(SRC_DATA_SHIELD_SERVER
   ${SRC_SERVICE}
+  src/cli/server.cpp
+  src/cli/data_shield_server.cpp
+)
+
+# CLI files for client
+set(SRC_DATA_SHIELD_CLIENT
   ${SRC_STUB}
-  ${SRC_CLI}
+  src/cli/client.cpp
+  src/cli/data_shield_client.cpp
 )
 
 # Create object library - compiled once, linked to both executables
 add_library(obj_common OBJECT ${SRC_COMMON})
 
-add_executable(data_shield
-  ${SRC_DATA_SHIELD}
+# Create object library for cli - compiled once, linked to both executables
+add_library(obj_cli_common OBJECT ${SRC_CLI_COMMON})
+
+add_executable(data_shield_server
+  ${SRC_DATA_SHIELD_SERVER}
   $<TARGET_OBJECTS:obj_common>
+  $<TARGET_OBJECTS:obj_cli_common>
 )
 
-target_link_libraries(data_shield PRIVATE gRPC::grpc++ protobuf::libprotobuf Threads::Threads)
+add_executable(data_shield_client
+  ${SRC_DATA_SHIELD_CLIENT}
+  $<TARGET_OBJECTS:obj_common>
+  $<TARGET_OBJECTS:obj_cli_common>
+)
+
+target_link_libraries(data_shield_server PRIVATE gRPC::grpc++ protobuf::libprotobuf Threads::Threads)
+target_link_libraries(data_shield_client PRIVATE gRPC::grpc++ protobuf::libprotobuf Threads::Threads)
 
 # Enable testing support
 enable_testing()

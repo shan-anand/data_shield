@@ -18,6 +18,8 @@ class Server
 {
 public:
   enum class RunMode { Sync, Async };
+  static RunMode getRunMode(const std::string& _modeStr);
+
 public:
   Server();
   Server(const HostInfo& _hostInfo);

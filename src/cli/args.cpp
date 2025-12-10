@@ -29,7 +29,8 @@ Args Args::parse(int argc, char**argv, int startIndex)
 HostInfo Args::get_host() const
 {
   HostInfo hostInfo;
-  auto it = std::find_if(this->begin(), this->end(), [](const Arg& arg) { return arg.key == "--addr"; });
+  auto it = std::find_if(this->begin(), this->end(),
+              [](const Arg& arg) { return arg.key == "--addr"; });
   if ( it != this->end() )
   {
     if ( !it->value.has_value() )
@@ -37,7 +38,8 @@ HostInfo Args::get_host() const
     hostInfo.set(it->value.value());
   }
   // --port overrides port in --addr
-  it = std::find_if(this->begin(), this->end(), [](const Arg& arg) { return arg.key == "--port"; });
+  it = std::find_if(this->begin(), this->end(),
+              [](const Arg& arg) { return arg.key == "--port"; });
   if ( it != this->end() )
   {
     if ( !it->value.has_value() )
